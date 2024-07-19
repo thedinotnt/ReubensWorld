@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flappy Bird</title>
+    <style>
+        .no_pad {
+            margin: 0;
+            padding: 0;
+        }
+        .bird {
+            width: 100px;
+            transition: transform 0.1s ease; /* Smooth transition for the bird's movement */
+        }
+        .bird_area {
+            padding: 100px;
+            width: 10px;
+        }
+        .pipe_area {
+            width: 200px;
+            justify-content: right;
+        }
+        .pipe {
+            width: 200px;
+        }
+    </style>
+</head>
+<body class="no_pad">
+    <button onclick="Homepage()">Return to Homepage</button>
+    <div>
+    
+    
+    <div class="bird_area">
+        <img class="bird" src="download (1).png">
+    </div>
+    <div class="pipe_area">
+        <img class="pipe" src="pipe.png">
+    </div>
+</div>
+<script>
+    function Homepage(){
+        window.location.href = "/reuben.fun"
+    }
+
+    let isJumping = false;
+    let Y = -50
+    let X = -10
+    let upordown = ""
+
+    function jump() {
+        isJumping = true
+        const birdElement = document.querySelector('.bird')
+        
+        
+        if(Y > -100) {
+            Y = Y - 100
+        }
+        if(Y < -50) {
+            Y = -100
+        }
+        if(Y > 600) {
+            Y = 600
+        }
+        birdElement.style.transform = `translateY(${Y}px)`
+        
+        isJumping = false;
+        
+    }
+    
+    setInterval(Frame, 50)
+
+    setInterval(PipeRepeat, 1000)
+
+    function Frame() {
+        if(isJumping == false) {
+            const birdElement = document.querySelector('.bird')
+
+            birdElement.style.transform = `translateY(${Y}px)`
+            Y = Y + 10  
+        }
+        if(Y > 700) {
+            Y = 699
+        }
+        if(Y < -100) {
+            Y = -99    
+        }
+
+        X = 100
+
+        const pipeElement = document.querySelector('.pipe')
+
+        pipeElement.style.transform = `translateX(${X}px)`
+    }
+
+    function PipeRepeat() {
+        //pick random between 1 or 2 and up or down
+        Math.random()
+        pipeElement.style.transform = `translateX(${X}px)`
+    }
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === " ") {
+            jump(); //setting the style to transform 50 so just make the 50 change to make the bird be able to fall
+        }
+    });
+</script>
+</body>
+</html>

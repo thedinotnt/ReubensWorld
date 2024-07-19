@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Reuben.fun</title>
+        <style>
+            .header {
+                font-family: Helvetica, sans-serif;
+                opacity: 100%;
+            }
+            .headerC {
+                font-family: Helvetica, sans-serif;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: rgb(100, 100, 200);
+                opacity: 1;
+                height: 100%;
+                width: 100%;
+                border-bottom-left-radius: 10px;
+                border-bottom-right-radius: 10px;
+            }
+
+            .button {
+                font-family: Helvetica, sans-serif;
+                background-color: aqua;
+                border-color: lime;
+            }
+
+            .no_pad {
+                margin: 0;
+                padding: 0;
+            }
+
+            .grid {
+                align-items: center;
+                justify-content: center;
+                display: flex;
+                padding-left: 200px;
+                padding-right: 200px;
+            }
+            .dropbtn {
+                background-color: #04AA6D;
+                color: white;
+                padding: 16px;
+                font-size: 16px;
+                border: none;
+            }
+
+            .dropdown {
+                position: relative;
+                display: inline-block;
+            }
+
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f1f1f1;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+            }  
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+            
+            .prevent-select {
+                -webkit-user-select: none; /* Safari */
+                -ms-user-select: none; /* IE 10 and IE 11 */
+                user-select: none; /* Standard syntax */
+            }
+
+            .dropdown-content a:hover {background-color: #ddd;}
+
+            .dropdown:hover .dropdown-content {display: block;}
+
+            .dropdown:hover .dropbtn {background-color: #3e8e41;}
+        </style>
+    </head>
+    <body class="no_pad">
+        <div class="headerC">
+            <h1 class="header">Reuben.Fun</h1>
+        </div>
+        <div class="panic">
+            <div class="dropdown">
+                <button class="dropbtn">Panic button settings</button>
+                <div class="dropdown-content">
+                    <a class="prevent-select" onclick="GeographySelected()">Geography</a>
+                    <a class="prevent-select" onclick="HistorySelected()">History</a>
+                    <a class="prevent-select" onclick="ITSelected()">IT</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <div class="grid">
+            <div>
+                <h1 onclick="flappy_bird()" class="grid">[]</h1>
+            </div>
+            <div>
+                <h1 class="grid">[]</h1> <!-- onclick go to game pages -->
+            </div>
+            <div>
+                <h1 class="grid">[]</h1>
+            </div>
+        </div>
+    <script>
+        var panicLink = ""
+        function flappy_bird() {
+            window.location.href= "/reuben.fun/flappy_bird.html"
+        }
+        
+        function GeographySelected() {
+            panicLink = "Geography"
+            console.log(panicLink)
+        }
+        function HistorySelected() {
+            panicLink = "History"
+            console.log(panicLink)
+        }
+        function ITSelected() {
+            panicLink = "IT"
+            console.log(panicLink)
+        }
+        
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "p") {
+                window.location.href = "https://en.wikipedia.org/wiki/" + panicLink
+            }
+        });
+
+    </script>
+    
+    </body>
+</html>
