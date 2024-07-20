@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Reuben.fun</title>
+        <title>Reubens.World</title>
         <link rel="icon" type="image/x-icon" href="favicon.png" />
         <style>
             .header {
@@ -14,7 +14,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                background-color: rgb(100, 100, 200);
+                background-color: rgba(87, 124, 202, 0.747);
                 opacity: 1;
                 height: 100%;
                 width: 100%;
@@ -28,9 +28,11 @@
                 border-color: lime;
             }
 
-            .no_pad {
+            body {
                 margin: 0;
                 padding: 0;
+                background-image: url('background.png');
+                background-size: 100%;
             }
 
             .grid {
@@ -39,7 +41,19 @@
                 display: flex;
                 padding-left: 200px;
                 padding-right: 200px;
+                font-family: Helvetica, sans-serif;
+                
             }
+
+            .grid-item {
+                background-color: rgba(119, 136, 153, 0.692);
+                padding-top: 10px;
+                padding-bottom: 10px;
+                padding-left: 200px;
+                padding-right: 200px;
+                border-radius: 10px;
+            }
+
             .dropbtn {
                 background-color: #04AA6D;
                 color: white;
@@ -51,6 +65,7 @@
             .dropdown {
                 position: relative;
                 display: inline-block;
+                font-family: Helvetica, sans-serif;
             }
 
             .dropdown-content {
@@ -82,34 +97,38 @@
             .dropdown:hover .dropbtn {background-color: #3e8e41;}
         </style>
     </head>
-    <body class="no_pad">
+    <body>
         <div class="headerC">
-            <h1 class="header">Reuben.Fun</h1>
+            <h1 class="header">Reubens.World</h1>
         </div>
-        <div class="panic">
-            <div class="dropdown">
-                <button class="dropbtn">Panic button settings</button>
-                <div class="dropdown-content">
-                    <a class="prevent-select" onclick="GeographySelected()">Geography</a>
-                    <a class="prevent-select" onclick="HistorySelected()">History</a>
-                    <a class="prevent-select" onclick="ITSelected()">IT</a>
-                </div>
+        
+        
+        
+        <div class="dropdown">
+            <button class="dropbtn">Panic button settings</button>
+            <div class="dropdown-content">
+                <a class="prevent-select" onclick="GeographySelected()">Geography</a>
+                <a class="prevent-select" onclick="HistorySelected()">History</a>
+                <a class="prevent-select" onclick="ITSelected()">IT</a>
             </div>
         </div>
+        
         
         
         
         <div class="grid">
             <div>
-                <h1 onclick="flappy_bird()" class="grid">[]</h1>
+                <h1 onclick="flappy_bird()" class="grid-item">Flappy Bird</h1>
             </div>
             <div>
-                <h1 class="grid">[]</h1> <!-- onclick go to game pages -->
+                <h1 class="grid-item">[]</h1> <!-- onclick go to game pages -->
             </div>
             <div>
-                <h1 class="grid">[]</h1>
+                <h1 class="grid-item">[]</h1>
             </div>
         </div>
+
+
     <script>
         var panicLink = ""
         function flappy_bird() {
