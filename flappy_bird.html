@@ -21,6 +21,7 @@
         }
         .pipe {
             width: 200px;
+            rotate: 0deg;
         }
     </style>
 </head>
@@ -42,25 +43,26 @@
     }
 
     let isJumping = false;
-    let Y = -50
-    let X = -10
-    let upordown = ""
+    let BirdY = -50
+    let PipeX = 0
+    let PipeY = 0
+    let upordown = 0
 
     function jump() {
         isJumping = true
         const birdElement = document.querySelector('.bird')
         
         
-        if(Y > -100) {
-            Y = Y - 100
+        if(BirdY > -100) {
+            BirdY = BirdY - 100
         }
-        if(Y < -50) {
-            Y = -100
+        if(BirdY < -50) {
+            BirdY = -100
         }
-        if(Y > 600) {
-            Y = 600
+        if(BirdY > 600) {
+            BirdY = 600
         }
-        birdElement.style.transform = `translateY(${Y}px)`
+        birdElement.style.transform = `translateY(${BirdY}px)`
         
         isJumping = false;
         
@@ -74,27 +76,39 @@
         if(isJumping == false) {
             const birdElement = document.querySelector('.bird')
 
-            birdElement.style.transform = `translateY(${Y}px)`
-            Y = Y + 10  
+            birdElement.style.transform = `translateY(${BirdY}px)`
+            BirdY = BirdY + 10  
         }
-        if(Y > 700) {
-            Y = 699
+        if(BirdY > 700) {
+            BirdY = 699
         }
-        if(Y < -100) {
-            Y = -99    
+        if(BirdY < -100) {
+            BirdY = -99    
         }
-
-        X = 100
 
         const pipeElement = document.querySelector('.pipe')
 
-        pipeElement.style.transform = `translateX(${X}px)`
+        pipeElement.style.transform = `translateX(${PipeX}px)`
+        pipeElement.style.transform = `translateY(${PipeY}px)`
     }
 
     function PipeRepeat() {
-        //pick random between 1 or 2 and up or down
-        Math.random()
-        pipeElement.style.transform = `translateX(${X}px)`
+        const pipeElement = document.querySelector('.pipe')
+        upordown = Math.floor(Math.random() * 2)
+        
+        if(upordown == 0) {
+            console.log("down")
+            PipeY = 100
+            pipeElement.style.rotate = "180deg"
+        }
+        else {
+            console.log("up")
+            PipeY = -100
+            pipeElement.style.rotate = "0deg"
+        }
+        
+        pipeElement.style.transform = `translateX(${PipeX}px)`
+        pipeElement.style.transform = `translateY(${PipeY}px)`
     }
 
     document.addEventListener('keydown', function(event) {
@@ -102,6 +116,13 @@
             jump(); //setting the style to transform 50 so just make the 50 change to make the bird be able to fall
         }
     });
+
+    document.addEventListener('keydown', function(event) {
+            if (event.key === "p") {
+                window.location.href = "https://en.wikipedia.org/wiki/" + document.cookie
+                console.log(document.cookie)
+            }
+        });
 </script>
 </body>
 </html>

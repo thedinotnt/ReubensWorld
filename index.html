@@ -138,19 +138,23 @@
         function GeographySelected() {
             panicLink = "Geography"
             console.log(panicLink)
+            document.cookie = "Geography"
         }
         function HistorySelected() {
             panicLink = "History"
             console.log(panicLink)
+            document.cookie = "History"
         }
         function ITSelected() {
             panicLink = "IT"
             console.log(panicLink)
+            document.cookie = "IT"
         }
         
         document.addEventListener('keydown', function(event) {
             if (event.key === "p") {
-                window.location.href = "https://en.wikipedia.org/wiki/" + panicLink
+                window.location.href = "https://en.wikipedia.org/wiki/" + document.cookie
+                console.log(document.cookie)
             }
         });
 
