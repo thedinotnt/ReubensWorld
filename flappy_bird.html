@@ -6,6 +6,7 @@
         .no_pad {
             margin: 0;
             padding: 0;
+            overflow-y: hidden;
         }
         .bird {
             width: 100px;
@@ -28,15 +29,13 @@
 <body class="no_pad">
     <button onclick="Homepage()">Return to Homepage</button>
     <div>
-    
-    
     <div class="bird_area">
         <img class="bird" src="download (1).png">
     </div>
     <div class="pipe_area">
         <img class="pipe" src="pipe.png">
     </div>
-</div>
+    </div>
 <script>
     function Homepage(){
         window.location.href = "/"
@@ -47,6 +46,8 @@
     let PipeX = 0
     let PipeY = 0
     let upordown = 0
+    let upcount = 0
+    let downcount = 0
 
     function jump() {
         isJumping = true
@@ -70,11 +71,12 @@
     
     setInterval(Frame, 50)
 
-    setInterval(PipeRepeat, 1000)
+    setInterval(PipeRepeat, 3000)
 
     function Frame() {
+        const birdElement = document.querySelector('.bird')
         if(isJumping == false) {
-            const birdElement = document.querySelector('.bird')
+            
 
             birdElement.style.transform = `translateY(${BirdY}px)`
             BirdY = BirdY + 10  
@@ -88,8 +90,15 @@
 
         const pipeElement = document.querySelector('.pipe')
 
-        pipeElement.style.transform = `translateX(${PipeX}px)`
-        pipeElement.style.transform = `translateY(${PipeY}px)`
+        if(upordown == 0) {
+            PipeX = PipeX + 20
+        }
+        else {
+            PipeX = PipeX - 20
+        }
+        pipeElement.style.transform = `translate(${PipeX}px, ${PipeY}px)`
+        
+        checkCollision();
     }
 
     function PipeRepeat() {
@@ -97,23 +106,62 @@
         upordown = Math.floor(Math.random() * 2)
         
         if(upordown == 0) {
-            console.log("down")
-            PipeY = 100
-            pipeElement.style.rotate = "180deg"
+            downcount = 0
+            if(upcount < 2) {
+                upcount = upcount + 1
+            }
+            else{
+                upordown = 1
+                upcount = 0
+            }
         }
         else {
-            console.log("up")
-            PipeY = -100
-            pipeElement.style.rotate = "0deg"
+            if(downcount < 2) {
+                downcount = downcount + 1
+            }
+            else{
+                upordown = 0
+                downcount  = 0
+            }
         }
         
-        pipeElement.style.transform = `translateX(${PipeX}px)`
-        pipeElement.style.transform = `translateY(${PipeY}px)`
+
+        if(upordown == 0) {
+            PipeY = -200
+            PipeX = -1000
+            pipeElement.style.rotate = "180deg" //down
+        }
+        else {
+            
+            PipeY = -350
+            PipeX = 1000
+            pipeElement.style.rotate = "0deg" //up
+        }
+        
+        
+
+        
+        pipeElement.style.transform = `translate(${PipeX}px, ${PipeY}px)` // make so there is no gap between pipes. so they meet in the middle
+
     }
 
+    function checkCollision() {
+        const birdElement = document.querySelector('.bird')
+        const pipeElement = document.querySelector('.pipe')
+
+
+        const birdRect = birdElement.getBoundingClientRect();
+        const pipeRect = pipeElement.getBoundingClientRect();
+
+        // Check if the bird's bottom touches the top of the pipe
+        if(birdRect.bottom >= pipeRect.top && birdRect.left <= pipeRect.right && birdRect.right >= pipeRect.left) {
+            console.log("Collision Detected!");
+        }
+    }
+    
     document.addEventListener('keydown', function(event) {
         if (event.key === " ") {
-            jump(); //setting the style to transform 50 so just make the 50 change to make the bird be able to fall
+            jump(); 
         }
     });
 
