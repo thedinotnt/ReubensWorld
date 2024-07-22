@@ -13,7 +13,7 @@
                 font-family: Helvetica, sans-serif;
                 display: flex;
                 align-items: center;
-                justify-content: center;
+                justify-content: space-between;
                 background-color: rgba(87, 124, 202, 0.747);
                 opacity: 1;
                 height: 100%;
@@ -95,7 +95,12 @@
             }
 
             .blog {
-                float: right; /* doesnt work*/
+                margin-left: auto;
+            }
+
+            .titleContainer {
+                flex-grow: 1;
+                text-align: center;
             }
 
             .dropdown-content a:hover {background-color: #ddd;}
@@ -107,8 +112,10 @@
     </head>
     <body>
         <div class="headerC">
-            <h1 class="header">Reubens.World</h1>
-            <h2 class="blog">blog</h2>
+            <div class="titleContainer">
+                <h1 class="header" onclick="Reload()">Reubens.world</h1>
+            </div>
+            <h2 class="blog" onclick="Blog()">Blog</h2>
         </div>
         
         
@@ -140,8 +147,17 @@
 
     <script>
         var panicLink = ""
+        
         function flappy_bird() {
             window.location.href= "/flappy_bird.html"
+        }
+        
+        function Reload() {
+            window.location.href= "/"
+        }
+
+        function Blog() {
+            window.location.href= "/blog.html"
         }
         
         function GeographySelected() {
@@ -149,11 +165,13 @@
             console.log(panicLink)
             document.cookie = "Geography"
         }
+        
         function HistorySelected() {
             panicLink = "History"
             console.log(panicLink)
             document.cookie = "History"
         }
+        
         function ITSelected() {
             panicLink = "IT"
             console.log(panicLink)

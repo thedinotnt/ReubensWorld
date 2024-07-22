@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Reubens Blog</title>
+    <style>
+        .header {
+                font-family: Helvetica, sans-serif;
+                opacity: 100%;
+            }
+        
+        .headerC {
+                font-family: Helvetica, sans-serif;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background-color: rgba(87, 124, 202, 0.747);
+                opacity: 1;
+                height: 100%;
+                width: 100%;
+                border-bottom-left-radius: 10px;
+                border-bottom-right-radius: 10px;
+        }
+        
+        .blog {
+                margin-left: auto;
+        }
+
+        .titleContainer {
+                flex-grow: 1;
+                text-align: center;
+        }
+
+        body {
+            background-image: url("blog background.png");
+            color: white;
+            font-family: Helvetica, sans-serif;
+        }
+        
+        .director {
+            float: left;
+            margin: 50px;
+            padding-left: 10px;
+            /* padding-top: 10px; */
+            padding-right: 10px;
+            padding-bottom: 10px;
+            background-color: rgba(119, 136, 153, 0.692);
+            border-radius: 10px;
+        }
+    </style>
+    </head>
+    <body>
+        <div class="headerC">
+            <div class="titleContainer">
+                <h1 class="header" onclick="Reload()">Reubens.world</h1>
+            </div>
+            <h2 class="blog" onclick="Blog()">Blog</h2>
+        </div>
+        <div class="director">
+            <h1><u>Contents</u></h1>
+            <h2>- <u>About me</u></h2>
+            <h3>-- Me</h3>
+            <h3>-- Other projects</h3>
+            <h2>- <u>How I made (this website)</u></h2>
+            <h3>-- This website</h3>
+            <h3>-- Flappy bird</h3>
+        </div>
+    </body>
+</html>
