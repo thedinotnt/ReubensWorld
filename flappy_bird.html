@@ -53,178 +53,196 @@
     <p id="Score" class="score"></p>
     <p id="highScore" class="highScore"></p>
     <script>
-    function Homepage(){
-        window.location.href = "/"
-    }
-
-    let isJumping = false;
-    let BirdY = -50
-    let PipeX = 0
-    let PipeY = 0
-    let upordown = 0
-    let upcount = 0
-    let downcount = 0
-    let score = 0
-    let highScore = getCookie("highscore")
-
-    function jump() {
-        isJumping = true
-        const birdElement = document.querySelector('.bird')
-        
-        if(BirdY > -100) {
-            BirdY = BirdY - 100
+        function Homepage(){
+            window.location.href = "/"
         }
-        if(BirdY < -50) {
-            BirdY = -100
-        }
-        if(BirdY > 600) {
-            BirdY = 600
-        }
-        birdElement.style.transform = `translateY(${BirdY}px)`
         
-        isJumping = false;
+        let isJumping = false;
+        let BirdY = -50
+        let PipeX = 0
+        let PipeY = 0
+        let upordown = 0
+        let upcount = 0
+        let downcount = 0
+        let score = 0
+        // Removed the direct assignment here
+        let highScore;
         
-    }
-    
-    setInterval(Frame, 50)
-
-    setInterval(PipeRepeat, 3000)
-
-    function Frame() {
-        const birdElement = document.querySelector('.bird')
-        if(isJumping == false) {
+        function initializeHighScore() {
+            let storedHighScore = getCookie("highscore");
+            if (storedHighScore === null || storedHighScore === undefined) {
+                // If the high score cookie is not found, set it to 0
+                setCookie("highscore", "0", 365); // Set cookie to expire in 365 days
+                highScore = 0;
+            } else {
+                highScore = parseInt(storedHighScore, 10); // Ensure highScore is an integer
+            }
+        }
+        
+        function setCookie(name, value, days) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+        
+        initializeHighScore(); // Initialize highScore correctly
+        
+        function jump() {
+            isJumping = true
+            const birdElement = document.querySelector('.bird')
             
-
+            if(BirdY > -100) {
+                BirdY = BirdY - 100
+            }
+            if(BirdY < -50) {
+                BirdY = -100
+            }
+            if(BirdY > 600) {
+                BirdY = 600
+            }
             birdElement.style.transform = `translateY(${BirdY}px)`
-            BirdY = BirdY + 10  
-        }
-        if(BirdY > 700) {
-            BirdY = 699
-        }
-        if(BirdY < -100) {
-            BirdY = -99    
-        }
-
-        const pipeElement = document.querySelector('.pipe')
-
-        if(upordown == 0) {
-            PipeX = PipeX + 20
-        }
-        else {
-            PipeX = PipeX - 20
-        }
-        pipeElement.style.transform = `translate(${PipeX}px, ${PipeY}px)`
-        
-        checkCollision();
-
-        console.log(`score = ${score}, highscore = ${highScore}`)
-        if(highScore < score) {
-            highScore = score
-            document.cookie = `highscore=${highScore}`
-        }
-        document.getElementById("Score").innerHTML = score
-        document.getElementById("highScore").innerHTML = highScore
-    }
-
-    function PipeRepeat() {
-        const pipeElement = document.querySelector('.pipe')
-        upordown = Math.floor(Math.random() * 2)
-        
-        if(upordown == 0) {
-            downcount = 0
-            if(upcount < 2) {
-                upcount = upcount + 1
-            }
-            else{
-                upordown = 1
-                upcount = 0
-            }
-        }
-        else {
-            if(downcount < 2) {
-                downcount = downcount + 1
-            }
-            else{
-                upordown = 0
-                downcount  = 0
-            }
-        }
-        
-
-        if(upordown == 0) {
-            PipeY = -200
-            PipeX = -1000
-            pipeElement.style.rotate = "180deg" //down
-        }
-        else {
             
-            PipeY = -350
-            PipeX = 1000
-            pipeElement.style.rotate = "0deg" //up
+            isJumping = false;
+            
         }
         
+        setInterval(Frame, 50)
         
-
+        setInterval(PipeRepeat, 3000)
         
-        pipeElement.style.transform = `translate(${PipeX}px, ${PipeY}px)` // make so there is no gap between pipes. so they meet in the middle
-
-        score = score + 1
-        
-    }
-
-    function checkCollision() {
-    const birdElement = document.querySelector('.bird');
-    const pipeElement = document.querySelector('.pipe');
-
-    const birdRect = birdElement.getBoundingClientRect();
-    const pipeRect = pipeElement.getBoundingClientRect();
-
-    // Adjusted collision detection logic
-    // Check if the bird is within the horizontal bounds of the pipe
-    if (birdRect.left <= pipeRect.right && birdRect.right >= pipeRect.left) {
-        // When the pipe is up, only detect collision at the bottom part of the pipe
-        if (upordown === 1) { // Assuming upordown === 1 means the pipe is up
-            if (birdRect.bottom >= pipeRect.top && birdRect.top <= pipeRect.bottom) {
-                console.log("Collision Detected!")
-                // alert(`You Died, Score = ${score}`)
-                reset()
+        function Frame() {
+            const birdElement = document.querySelector('.bird')
+            if(isJumping == false) {
+                birdElement.style.transform = `translateY(${BirdY}px)`
+                BirdY = BirdY + 10  
             }
-        } else { // When the pipe is down, detect collision along its entire height
-            if (birdRect.top <= pipeRect.bottom && birdRect.bottom >= pipeRect.top) {
-                console.log("Collision Detected!")
-                // alert(`You Died, Score = ${score}`)
-                reset()
+            if(BirdY > 700) {
+                BirdY = 699
+            }
+            if(BirdY < -100) {
+                BirdY = -99    
+            }
+        
+            const pipeElement = document.querySelector('.pipe')
+        
+            if(upordown == 0) {
+                PipeX = PipeX + 20
+            }
+            else {
+                PipeX = PipeX - 20
+            }
+            pipeElement.style.transform = `translate(${PipeX}px, ${PipeY}px)`
+            
+            checkCollision();
+        
+            console.log(`score = ${score}, highscore = ${highScore}`)
+            if(highScore < score) { // Fixed comparison operator
+                highScore = score
+                setCookie("highscore", highScore.toString(), 365)
+            }
+            document.getElementById("Score").innerHTML = score
+            document.getElementById("highScore").innerHTML = highScore
+        }
+        
+        function PipeRepeat() {
+            const pipeElement = document.querySelector('.pipe')
+            upordown = Math.floor(Math.random() * 2)
+            
+            if(upordown == 0) {
+                downcount = 0
+                if(upcount < 2) {
+                    upcount = upcount + 1
+                }
+                else{
+                    upordown = 1
+                    upcount = 0
+                }
+            }
+            else {
+                if(downcount < 2) {
+                    downcount = downcount + 1
+                }
+                else{
+                    upordown = 0
+                    downcount  = 0
+                }
+            }
+        
+            if(upordown == 0) {
+                PipeY = -200
+                PipeX = -1000
+                pipeElement.style.rotate = "180deg" //down
+            }
+            else {
+                
+                PipeY = -350
+                PipeX = 1000
+                pipeElement.style.rotate = "0deg" //up
+            }
+            
+            
+            pipeElement.style.transform = `translate(${PipeX}px, ${PipeY}px)` // make so there is no gap between pipes. so they meet in the middle
+        
+            score = score + 1
+            
+        }
+        
+        function checkCollision() {
+        const birdElement = document.querySelector('.bird');
+        const pipeElement = document.querySelector('.pipe');
+        
+        const birdRect = birdElement.getBoundingClientRect();
+        const pipeRect = pipeElement.getBoundingClientRect();
+        
+        // Adjusted collision detection logic
+        if (birdRect.left <= pipeRect.right && birdRect.right >= pipeRect.left) {
+            if (upordown === 1) { // Assuming upordown === 1 means the pipe is up
+                if (birdRect.bottom >= pipeRect.top && birdRect.top <= pipeRect.bottom) {
+                    console.log("Collision Detected!")
+                    reset()
+                }
+            } else { // When the pipe is down, detect collision along its entire height
+                if (birdRect.top <= pipeRect.bottom && birdRect.bottom >= pipeRect.top) {
+                    console.log("Collision Detected!")
+                    reset()
+                }
             }
         }
-    }
-}
-
-    
-    document.addEventListener('keydown', function(event) {
-        if (event.key === " ") {
-            jump(); 
         }
-    });
-
-    document.addEventListener('keydown', function(event) {
-        if (event.key === "p") {
-            window.location.href = "https://en.wikipedia.org/wiki/" + getCookie("link")
-            console.log(getCookie("link"))
+        
+        document.addEventListener('keydown', function(event) {
+            if (event.key === " ") {
+                jump(); 
+            }
+        });
+        
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "p") {
+                window.location.href = "https://en.wikipedia.org/wiki/" + getCookie("link")
+                console.log(getCookie("link"))
+            }
+        });
+        
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+            return null;
         }
-    });
-    
-    function getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
-    }
-    function reset() {
-        window.location.href = "/flappy_bird.html"
-    }
-    function resetScore() {
-        document.cookie = "highscore=0"
-        reset()
-    }
-    </script>
+        
+        function reset() {
+            window.location.href = "/flappy_bird.html"
+        }
+        
+        function resetScore() {
+            document.cookie = "highscore=0; expires=Thu, 01 Jan 1970 00:00:01 GMT;" // Set cookie to expire immediately
+            reset()
+        }
+        </script>
+        
 </body>
 </html>
