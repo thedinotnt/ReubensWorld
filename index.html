@@ -163,27 +163,33 @@
         function GeographySelected() {
             panicLink = "Geography"
             console.log(panicLink)
-            document.cookie = "Geography"
+            document.cookie = "link=Geography"
         }
         
         function HistorySelected() {
             panicLink = "History"
             console.log(panicLink)
-            document.cookie = "History"
+            document.cookie = "link=History"
         }
         
         function ITSelected() {
             panicLink = "IT"
             console.log(panicLink)
-            document.cookie = "IT"
+            document.cookie = "link=IT"
         }
         
         document.addEventListener('keydown', function(event) {
             if (event.key === "p") {
-                window.location.href = "https://en.wikipedia.org/wiki/" + document.cookie
-                console.log(document.cookie)
+                window.location.href = "https://en.wikipedia.org/wiki/" + getCookie("link")
+                console.log(getCookie("link"))
             }
         });
+
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
 
     </script>
     

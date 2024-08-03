@@ -46,6 +46,17 @@
             background-color: rgba(119, 136, 153, 0.692);
             border-radius: 10px;
         }
+
+        .text {
+            float: left;
+            margin: 50px;
+            padding-left: 10px;
+            /* padding-top: 10px; */
+            padding-right: 10px;
+            padding-bottom: 10px;
+            background-color: rgba(119, 136, 153, 0.692);
+            border-radius: 10px;
+        }
     </style>
     </head>
     <body>
@@ -53,7 +64,7 @@
             <div class="titleContainer">
                 <h1 class="header" onclick="Reload()">Reubens.world</h1>
             </div>
-            <h2 class="blog" onclick="Blog()">Blog</h2>
+            <h2 class="blog" onclick="Return()">Return</h2>
         </div>
         <div class="director">
             <h1><u>Contents</u></h1>
@@ -64,5 +75,27 @@
             <h3>-- This website</h3>
             <h3>-- Flappy bird</h3>
         </div>
+        <div class="text">
+            <h1><u>This Website</u></h1>
+            <p>This website was made by hand in html code, and hosted on an AWS (Amazon Website Services) and was up and running, behind a password, on the 19th July 2024.</p>
+            <p>I was 13 years old when I made this site and I set it up all by myself.</p>
+            <p>I used VS code's live preview to check linked to github, which is linked to the AWS Amplify server that redeploys the server every update I commit.</p>
+            <p>When I find ways of stuff working, I dont change it, so rather than it being 1 line; I'll just make it 50 if thats how I know how to do it.</p>
+            <p>At first I wanted the domain Reuben.fun, but then godaddy's recommendations showed me a list of 40 more, so then I wanted Reubens.world and thats what im sticking to now</p>
+        </div>
+        <script>
+            function Reload() {
+                window.location.href = "/"
+            }
+            function Return() {
+                window.location.href = "/"
+            }
+
+            function getCookie(name) {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop().split(';').shift();
+            }
+        </script>
     </body>
 </html>
