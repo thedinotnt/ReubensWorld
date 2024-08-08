@@ -37,11 +37,29 @@
             font-family: Helvetica, sans-serif;
             font-size: 20px;
         }
+        .jumpbutton{
+            background-color: blue;
+            height: 300px;
+            width: 300px;
+            border-radius: 100px;
+            transform: translateX(550px) translateY(450px);
+        }
+        .menupad {
+            padding: 10px;
+        }
+        .jumptext {
+            font-size: 100px;
+            font-family: Helvetica, sans-serif;
+            color: white;
+            transform: translateY(-30px) translateX(20px);
+        }
     </style>
 </head>
 <body class="no_pad">
-    <button onclick="Homepage()">Return to Homepage</button>
-    <button onclick="resetScore()">Reset highScore</button>
+    <div class="menupad">
+    <button onclick="Homepage()" class="menu1">Return to Homepage</button>
+    <button onclick="resetScore()" class="menu2">Reset highScore</button>
+    </div>
     <div class="game">
         <div class="bird_area">
             <img class="bird" src="bird.png">
@@ -242,6 +260,27 @@
             document.cookie = "highscore=0; expires=Thu, 01 Jan 1970 00:00:01 GMT;" // Set cookie to expire immediately
             reset()
         }
+        
+        function is_touch_device() {
+            return ('ontouchstart' in window) ||
+                (navigator.maxTouchPoints > 0) ||
+                (navigator.msMaxTouchPoints > 0);
+        }
+        if(is_touch_device()){
+            document.body.style.touchAction = 'manipulation'
+            console.log("Touch device")
+            // Create a new element for touch devices
+            var touchElement = document.createElement('div')
+            var menu1Element = document.querySelector('.menu1')
+            var menu2Element = document.querySelector('.menu2')
+            touchElement.innerHTML = '<div class="jumpbutton" onclick="jump()"><p class="jumptext">Jump</p></div>'
+            menu1Element.style.fontSize = '40px';
+            menu2Element.style.fontSize = '40px';
+    
+            // Append the new element to the body or another container
+            document.body.appendChild(touchElement);
+        }
+
         </script>
         
 </body>
