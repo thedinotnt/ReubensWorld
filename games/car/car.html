@@ -35,6 +35,13 @@ body {
 
 /* Status display */
 
+#homeButton {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1000; /* High z-index to keep it above other elements */
+        }
+
 #status {
 	position: absolute;
 	left: 0;
@@ -114,7 +121,7 @@ body {
 
 	</head>
 	<body>
-		<button onclick="Home()">Return to Homepage</button>
+		<button id="homeButton"onclick="Home()">Return to Homepage</button>
 		<canvas id="canvas">
 			HTML5 canvas appears to be unsupported in the current browser.<br >
 			Please try updating or use a different browser.
