@@ -114,6 +114,7 @@ body {
 
 	</head>
 	<body>
+		<button onclick="Home()">Return to Homepage</button>
 		<canvas id="canvas">
 			HTML5 canvas appears to be unsupported in the current browser.<br >
 			Please try updating or use a different browser.
@@ -134,7 +135,11 @@ body {
 			</div>
 			<div id="status-notice" class="godot" style="display: none;"></div>
 		</div>
-
+		<script>
+			function Home() {
+				window.location.href= "/"
+			}
+		</script>
 		<script src="car.js"></script>
 		<script>
 const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"executable":"car","experimentalVK":false,"fileSizes":{"car.pck":204192,"car.wasm":35708238},"focusCanvas":true,"gdextensionLibs":[]};
