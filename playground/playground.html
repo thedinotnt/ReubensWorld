@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PlayGround</title>
+        <style>
+        .header {
+                font-family: Helvetica, sans-serif;
+                opacity: 100%;
+        }
+        
+        .headerC {
+                font-family: Helvetica, sans-serif;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background-color: rgba(87, 124, 202, 0.747);
+                opacity: 1;
+                height: 100%;
+                width: 100%;
+                border-bottom-left-radius: 10px;
+                border-bottom-right-radius: 10px;
+        }
+
+        .blog {
+                margin-left: auto;
+                padding-right: 10px;
+        }
+
+        .titleContainer {
+                flex-grow: 1;
+                text-align: center;
+        }
+
+        body {
+            background-image: url("https://main.d1sjd8c274515h.amplifyapp.com/background1.png");
+            color: white;
+            font-family: Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .text {
+            flex-grow: 1;
+            text-align: center;
+            margin: 50px;
+            padding-left: 10px;
+            padding-top: 10px;
+            padding-right: 10px;
+            padding-bottom: 10px;
+            background-color: rgba(119, 136, 153, 0.692);
+            border-radius: 10px;
+        }
+
+        .progressBar {
+            width: 100%;
+        }
+
+        .gap {
+            padding-top: 100px;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="headerC">
+            <div class="titleContainer">
+                <h1 class="header" onclick="Reload()">Reubens.world</h1>
+            </div>
+            <h2 class="blog" onclick="Blog()">Blog</h2>
+        </div>
+        <div class="text">
+            <h1>Playground</h1>
+            <progress id="Progress1" class="progressBar"min="0" max="1000"></progress>
+            <div class="gap"></div>
+            <details>
+                <summary>Dropdown</summary>
+                <details>
+                    <summary>Dropdown</summary>
+                    <details>
+                        <summary>Dropdown</summary>
+                        <details>
+                            <summary>Dropdown</summary>
+                            <details>
+                                <summary>Dropdown</summary>
+                                <details>
+                                    <summary>Dropdown</summary>
+                                    <details>
+                                        <summary>Dropdown</summary>
+                                        <details>
+                                            <summary>Dropdown</summary>
+                                            <details>
+                                                <summary>Dropdown</summary>
+                                                <details>
+                                                    <summary>Dropdown</summary>
+                                                    <details>
+                                                        <summary>Dropdown</summary>
+                                                        <details>
+                                                            <summary>Dropdown</summary>
+                                                            <details>
+                                                                <summary>Dropdown</summary>
+                                                                <details>
+                                                                    <summary>Dropdown</summary>
+                                                                    <details>
+                                                                        <summary>Dropdown</summary>
+                                                                        <details>
+                                                                            <summary>Dropdown</summary>
+                                                                            <details>
+                                                                                <summary>Dropdown</summary>
+                                                                                <details>
+                                                                                    <summary>Ok the end now</summary>
+                                                                                    :)
+                                                                                </details>
+                                                                            </details>
+                                                                        </details>
+                                                                    </details>
+                                                                </details>
+                                                            </details>
+                                                        </details>
+                                                    </details>
+                                                </details>
+                                            </details>
+                                        </details>
+                                    </details>
+                                </details>
+                            </details>
+                        </details>
+                    </details>
+                </details>
+            </details>
+            <div class="gap"></div>
+            <p>
+                <ruby>OO
+                    <rt>\/</rt>
+                </ruby>
+            </p>
+            <meter id="meter1"min="0" max="1000" low="200" high="700" optimum="1000" class="progressBar"></meter>
+        </div>
+        
+        <script>
+            function Reload() {
+                window.location.href= "/"
+            }
+            
+            function Blog() {
+                window.location.href= "/blog/blog.html"
+            }
+            
+            const Progress1Element = document.getElementById("Progress1")
+            const Meter1Element = document.getElementById("meter1")
+
+            setInterval(progress1, 1)
+            setInterval(meter1, 1)
+        
+            let direction = 1; // 1 for incrementing, -1 for decrementing
+
+            function progress1() {
+                let currentValue = parseInt(Progress1Element.value) || 0
+    
+                
+                currentValue += direction
+    
+                // Check if we've hit the upper or lower limit and toggle direction
+                if (currentValue >= 1000) {
+                    direction = -1 // Start decrementing after reaching 1000
+                } else if (currentValue <= 0) {
+                    direction = 1 // Start incrementing after reaching 0
+                }
+    
+                
+                Progress1Element.value = currentValue
+    
+            }
+            let direction1 = 1
+            function meter1() {
+                let currentValue1 = parseInt(Meter1Element.value) || 0
+    
+                
+                currentValue1 += direction1
+    
+                // Check if we've hit the upper or lower limit and toggle direction
+                if (currentValue1 >= 1000) {
+                    direction1 = -1 // Start decrementing after reaching 1000
+                } else if (currentValue1 <= 0) {
+                    direction1 = 1 // Start incrementing after reaching 0
+                }
+    
+                
+                Meter1Element.value = currentValue1
+    
+            }
+
+        </script>
+        
+    </body>
+</html>
