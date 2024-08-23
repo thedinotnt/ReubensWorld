@@ -147,6 +147,19 @@ body {
 				window.location.href= "/"
 			}
 		</script>
+		<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/ReubensWorld/sw.js').then(function(registration) {
+        // Registration was successful
+        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+      }, function(err) {
+        // registration failed :(
+        console.log('ServiceWorker registration failed: ', err);
+      });
+    });
+  }
+</script>
 		<script src="car.js"></script>
 		<script>
 const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"executable":"car","experimentalVK":false,"fileSizes":{"car.pck":204192,"car.wasm":35708238},"focusCanvas":true,"gdextensionLibs":[]};
@@ -255,20 +268,6 @@ const engine = new Engine(GODOT_CONFIG);
 	}
 }());
 		</script>
-		<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-      navigator.serviceWorker.register('/ReubensWorld/sw.js').then(function(registration) {
-        // Registration was successful
-        console.log('ServiceWorker registration successful with scope: ', registration.scope);
-      }, function(err) {
-        // registration failed :(
-        console.log('ServiceWorker registration failed: ', err);
-      });
-    });
-  }
-</script>
-
 	</body>
 </html>
 
